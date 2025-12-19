@@ -3,303 +3,751 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Online [Nama Anda]</title>
+    <title>TokoKu SemiWool- Belanja Online Terpercaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS (Gaya Tampilan) --- */
-        :root {
-            --primary-color: #ff6f61; /* Warna Utama (Coral) */
-            --secondary-color: #333;
-            --light-bg: #f4f4f4;
-            --white: #fff;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--light-bg);
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Navigasi */
+        /* Navigation */
         nav {
-            background: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--secondary-color);
-            margin-left: 20px;
-            font-weight: 500;
-        }
-
-        /* Hero Section (Atas) */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://source.unsplash.com/1600x900/?store'); /* Placeholder Background */
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        .btn-cta {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 10px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-decoration: none;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-
-        .btn-cta:hover {
-            background: #e65a50;
-        }
-
-        /* Produk Section */
-        .container {
+        .nav-container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 0 20px;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--secondary-color);
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .product-grid {
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu {
+            display: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+
+        .shops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .shop-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            animation: fadeInScale 0.8s ease forwards;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .shop-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .shop-card:hover .shop-image {
+            transform: scale(1.1);
+        }
+
+        .shop-content {
+            padding: 25px;
+        }
+
+        .shop-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .shop-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .shop-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* About Page */
+        .about-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .about-content h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
+            margin-top: 40px;
         }
 
-        .product-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #ddd; /* Warna placeholder jika foto error */
-        }
-
-        .product-info {
-            padding: 20px;
+        .feature-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
             text-align: center;
+            transition: transform 0.3s ease;
         }
 
-        .price {
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 10px 0;
+        .feature-box:hover {
+            transform: translateY(-10px);
         }
 
-        .btn-buy {
-            background: var(--secondary-color);
-            color: var(--white);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin: 15px 0;
         }
 
-        .btn-buy:hover {
-            background: #555;
+        .feature-icon {
+            font-size: 3rem;
         }
 
-        /* --- LANDING PAGE BAWAH (PROFILE SECTION) --- */
-        .landing-bottom {
-            background: var(--white);
-            padding: 80px 20px;
+        /* Shop Detail Page */
+        .shop-detail {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .shop-detail-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 50px;
+            gap: 40px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
-        .profile-img-container {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid var(--primary-color);
-            flex-shrink: 0;
+        .shop-detail-image {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .profile-img {
+        .shop-detail-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
 
-        .landing-text {
-            max-width: 600px;
+        .shop-detail-info {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .landing-text h2 {
+        .shop-detail-info h2 {
+            color: #667eea;
             font-size: 2.5rem;
             margin-bottom: 20px;
-            color: var(--secondary-color);
         }
 
-        .landing-text p {
-            font-size: 1.1rem;
+        .shop-detail-info p {
             color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .shopee-button {
+            display: inline-block;
+            background: #ee4d2d;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(238, 77, 45, 0.4);
+        }
+
+        .shopee-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(238, 77, 45, 0.6);
+        }
+
+        .products-section {
+            margin-top: 40px;
+        }
+
+        .products-section h3 {
+            color: #333;
+            font-size: 2rem;
             margin-bottom: 20px;
         }
 
-        /* Footer */
-        footer {
-            background: var(--secondary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
+        /* Contact Page */
+        .contact-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
-        /* Responsif untuk HP */
+        .contact-content h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-box {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-box h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-box p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-200px) translateX(-50px);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0.6;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .landing-bottom { flex-direction: column; text-align: center; }
-            .profile-img-container { width: 200px; height: 200px; }
+            h1 {
+                font-size: 2.5rem;
+            }
+            .shops-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .about-content, .shop-detail, .contact-content {
+                padding: 30px 20px;
+            }
+            .shop-detail-header {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particles"></div>
 
+    <!-- Navigation -->
     <nav>
-        <div class="logo">TOKO SAYA.</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#produk">Produk</a>
-            <a href="#about">Tentang</a>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">🛍️ Semi Wool</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">Tentang Kami</a></li>
+                <li><a href="#" onclick="showPage('contact')">Kontak</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">☰</div>
         </div>
     </nav>
 
-    <header id="home" class="hero">
-        <h1>Temukan Barang Favoritmu</h1>
-        <p>Kualitas terbaik dengan harga terjangkau.</p>
-        <a href="#produk" class="btn-cta">Belanja Sekarang</a>
-    </header>
-
-    <section id="produk" class="container">
-        <h2 class="section-title">Produk Terlaris</h2>
-        <div class="product-grid">
-            
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300" alt="Produk 1" class="product-img">
-                <div class="product-info">
-                    <h3>Nama Produk 1</h3>
-                    <p class="price">Rp 150.000</p>
-                    <button class="btn-buy" onclick="beli('Produk 1')">Beli Sekarang</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300" alt="Produk 2" class="product-img">
-                <div class="product-info">
-                    <h3>Nama Produk 2</h3>
-                    <p class="price">Rp 200.000</p>
-                    <button class="btn-buy" onclick="beli('Produk 2')">Beli Sekarang</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="https://via.placeholder.com/300" alt="Produk 3" class="product-img">
-                <div class="product-info">
-                    <h3>Nama Produk 3</h3>
-                    <p class="price">Rp 95.000</p>
-                    <button class="btn-buy" onclick="beli('Produk 3')">Beli Sekarang</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="about" class="landing-bottom">
-        
-        <div class="profile-img-container">
-            <img src="https://via.placeholder.com/400x400" alt="Foto Pemilik" class="profile-img">
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <header>
+                <h1>🛍️ Semi Wool TokoKu</h1>
+                <p class="subtitle">Tampil keren tanpa ribet dengan fashion cewek bergaya minimalis. Potongan rapi, warna netral, dan desain kekinian membuat penampilan terlihat clean dan fashionable. Pas untuk hangout, kuliah, atau aktivitas santai lainnya👌.</p>
+            </header>
+            <div class="shops-grid" id="shopsGrid"></div>
         </div>
 
-        <div class="landing-text">
-            <h2>Tentang Owner</h2>
-            <p>Halo! Saya [Nama Anda]. Ini adalah toko online resmi saya. Saya berdedikasi untuk memberikan produk kualitas terbaik langsung ke tangan Anda. Terima kasih telah mendukung bisnis lokal!</p>
-            <p><strong>Hubungi saya:</strong> 0812-3456-7890</p>
-            <a href="https://wa.me/6281234567890" class="btn-cta">Chat via WhatsApp</a>
+        <!-- ABOUT PAGE -->
+        <div id="about" class="page">
+            <div class="about-content">
+                <h2>Tentang TokoKu</h2>
+                <p>Toko Semi Wool adalah platform marketplace yang menyediakan berbagai produk berkualitas dari 4 toko pilihan terbaik. Kami berkomitmen untuk memberikan pengalaman belanja online yang mudah, aman, dan menyenangkan.</p>
+                <p>Saatnya upgrade penampilan dengan fashion cewek yang mengikuti tren terbaru! Mulai dari outfit kasual hingga street style, semua hadir dengan desain kekinian, warna fresh, dan model yang cocok untuk aktivitas sehari-hari. Nyaman dipakai, mudah dipadukan, dan siap membuat gayamu makin standout.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">✅</div>
+                        <h3>Produk Terpercaya</h3>
+                        <p>100% Original dan Berkualitas Tinggi</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">🚚</div>
+                        <h3>Pengiriman Cepat</h3>
+                        <p>Kirim ke Seluruh Indonesia</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">💰</div>
+                        <h3>Harga Terbaik</h3>
+                        <p>Promo dan Diskon Menarik</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Garansi Resmi</h3>
+                        <p>Produk Bergaransi Official</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2024 Toko Online Anda. Dibuat dengan HTML & CSS.</p>
-    </footer>
+        <!-- SHOP DETAIL PAGES -->
+        <div id="shop-0" class="page">
+            <div class="shop-detail" id="shopDetail0"></div>
+        </div>
+        <div id="shop-1" class="page">
+            <div class="shop-detail" id="shopDetail1"></div>
+        </div>
+        <div id="shop-2" class="page">
+            <div class="shop-detail" id="shopDetail2"></div>
+        </div>
+        <div id="shop-3" class="page">
+            <div class="shop-detail" id="shopDetail3"></div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <div class="contact-content">
+                <h2>Hubungi Kami</h2>
+                <p style="text-align: center; color: #666; font-size: 1.1rem; margin-bottom: 30px;">
+                    Ada pertanyaan? Kami siap membantu Anda!
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-box">
+                        <div class="contact-icon">📧</div>
+                        <h3>Email</h3>
+                        <p>...</p>
+                    </div>
+                    <div class="contact-box">
+                        <div class="contact-icon">📱</div>
+                        <h3>WhatsApp</h3>
+                        <p>+62 821-3417-2241</p>
+                    </div>
+                    <div class="contact-box">
+                        <div class="contact-icon">📍</div>
+                        <h3>Alamat</h3>
+                        <p>Waruk Tengan 2, Tapen, Waruk Tengah, Kec. Pangkur, Kabupaten Ngawi, Jawa Timur 63282, Depan SDN Waruk Tengah 2</p>
+                    </div>
+                    <div class="contact-box">
+                        <div class="contact-icon">🕐</div>
+                        <h3>Jam Operasional</h3>
+                        <p>Senin - Sabtu<br>08:30 - 16:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 TokoKu. Semua produk dijual melalui Shopee Official Store.</p>
+            <p>Klik kartu toko untuk melihat detail dan berbelanja di Shopee!</p>
+        </footer>
+    </div>
 
     <script>
-        // --- JavaScript (Interaksi) ---
+        // ============================================
+        // GANTI DATA TOKO DI SINI
+        // ============================================
+        const shops = [
+            {
+                name: "Mecloth Store",
+                description: "Koleksi fashion terlengkap dengan gaya trendy dan modern. Pakaian berkualitas untuk pria dan wanita.",
+                fullDescription: "Fashion Store menghadirkan koleksi pakaian terkini dari brand lokal dan internasional. Kami menyediakan berbagai pilihan fashion mulai dari casual wear hingga formal wear dengan kualitas premium dan harga terjangkau. Setiap produk dipilih dengan cermat untuk memastikan kualitas dan kenyamanan terbaik.",
+                image: "https://down-tx-id.img.susercontent.com/id-11134216-7rask-m1c91ohy46ozc7_tn.webp",
+                shopeeUrl: "https://shopee.co.id/elizer.go?entryPoint=ShopBySearch&searchKeyword=mecloth.store",
+                badge: "Fashion & Style",
+                products: [
+                    "Kemeja & Baju Wanita",
+                    "Dress & Rok Fashionable",
+                    "Kemeja & Outerwear",
+                    "Celana Semi Wool Premium",
+                    "Aksesoris Fashion"
+                ]
+            },
+            {
+                name: "Mecloth.us",
+                description: "Dirancang untuk cewek yang suka gaya simpel tapi tetap ingin terlihat keren. Warna netral, desain clean, dan model timeless membuat outfit ini mudah di-mix and match.",
+                fullDescription: "Tampilkan pesona anggunmu dengan koleksi fashion cewek yang mengutamakan kesan elegan dan feminin. Dirancang dengan potongan modern, warna lembut, serta bahan nyaman yang cocok digunakan untuk acara formal maupun kasual. Setiap detail dibuat untuk menunjang kepercayaan diri dan memberikan tampilan yang classy tanpa berlebihan.",
+                image: "https://down-tx-id.img.susercontent.com/id-11134216-7rasf-m1895oniwlm860_tn.webp",
+                shopeeUrl: "https://shopee.co.id/vvxkj75e69?entryPoint=ShopBySearch&searchKeyword=mecloth.us",
+                badge: "Elektronik",
+                products: [
+                    "Kemeja dan baju wanita Terbaru",
+                    "Dress dan Rok Fashionable",
+                    "Kemeja Outwear",
+                    "Aksesoris Fashion",
+                    "Celana Semiwool premium"
+                ]
+            },
+            {
+                name: "Essi.id",
+                description: "Tampil simpel nggak berarti biasa. Koleksi fashion cewek ini hadir dengan desain minimalis yang tetap terlihat keren dan modern.",
+                fullDescription: "Saatnya upgrade penampilan dengan fashion cewek yang mengikuti tren terbaru! Mulai dari outfit kasual hingga street style, semua hadir dengan desain kekinian, warna fresh, dan model yang cocok untuk aktivitas sehari-hari. Nyaman dipakai, mudah dipadukan, dan siap membuat gayamu makin standout.",
+                image: "https://down-tx-id.img.susercontent.com/id-11134233-7r98t-lw7ae2h33o30d6_tn.webp",
+                shopeeUrl: "https://shopee.co.id/essi.id?entryPoint=ShopBySearch&searchKeyword=essi.id",
+                badge: "Beauty & Care",
+                products: [
+                    "Kemeja dan baju wanita terbaru",
+                    "Dres dan rok Fashionable",
+                    "Kemeja Outwear",
+                    "Aksesoris Fasion",
+                    "Celana Semiwol premium"
+                ]
+            },
+            {
+                name: "Hitav",
+                description: "Fashion cewek dengan konsep sederhana namun punya sentuhan kekinian. Menggunakan bahan yang nyaman dan potongan rapi, outfit ini cocok dipakai ke kampus, hangout, atau sekadar jalan santai.",
+                fullDescription: "Untuk kamu yang mengutamakan kenyamanan tanpa meninggalkan gaya, koleksi fashion cewek ini adalah pilihan tepat. Desain simpel, bahan adem, dan potongan fleksibel membuatnya cocok dipakai sepanjang hari. Tetap terlihat stylish dengan outfit yang praktis dan effortless.",
+                image: "https://down-tx-id.img.susercontent.com/id-11134216-7rbkb-m940guim6q8u4f_tn.webp",
+                shopeeUrl: "https://shopee.co.id/arramoslem?entryPoint=ShopBySearch&searchKeyword=hitav",
+                badge: "Home & Living",
+                products: [
+                    "Kemeja dan baju wanita terbaru",
+                    "Dres dan rok Fashionable",
+                    "Kemeja Outwear",
+                    "Aksesoris Fashion",
+                    "Celana Semiwol premium"
+                ]
+            }
+        ];
+        // ============================================
+
+        // Render shop cards di home page
+        const shopsGrid = document.getElementById('shopsGrid');
         
-        function beli(namaProduk) {
-            // Ini akan memunculkan pesan ketika tombol beli ditekan
-            alert("Terima kasih! Anda tertarik membeli " + namaProduk + ". \nFitur keranjang akan segera hadir!");
+        shops.forEach((shop, index) => {
+            const card = document.createElement('div');
+            card.className = 'shop-card';
+            card.innerHTML = `
+                <img src="${shop.image}" alt="${shop.name}" class="shop-image">
+                <div class="shop-content">
+                    <h2 class="shop-name">${shop.name}</h2>
+                    <p class="shop-description">${shop.description}</p>
+                    <span class="shop-badge">${shop.badge}</span>
+                </div>
+            `;
             
-            // Opsional: Redirect ke WhatsApp
-            // window.location.href = "https://wa.me/6281234567890?text=Saya mau beli " + namaProduk;
+            card.addEventListener('click', () => {
+                showPage('shop-' + index);
+            });
+            
+            shopsGrid.appendChild(card);
+
+            // Render shop detail page
+            const detailContainer = document.getElementById('shopDetail' + index);
+            detailContainer.innerHTML = `
+                <div class="shop-detail-header">
+                    <div class="shop-detail-image">
+                        <img src="${shop.image}" alt="${shop.name}">
+                    </div>
+                    <div class="shop-detail-info">
+                        <h2>${shop.name}</h2>
+                        <p>${shop.fullDescription}</p>
+                        <a href="${shop.shopeeUrl}" target="_blank" class="shopee-button">
+                            🛒 Belanja di Shopee
+                        </a>
+                    </div>
+                </div>
+                <div class="products-section">
+                    <h3>Produk Unggulan:</h3>
+                    <div class="features-grid">
+                        ${shop.products.map(product => `
+                            <div class="feature-box">
+                                <div class="feature-icon">✨</div>
+                                <h3>${product}</h3>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        // Page navigation
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            pages.forEach(page => page.classList.remove('active'));
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            if (pageId === 'home' || pageId.startsWith('shop-')) {
+                navLinks[0].classList.add('active');
+            } else if (pageId === 'about') {
+                navLinks[1].classList.add('active');
+            } else if (pageId === 'contact') {
+                navLinks[2].classList.add('active');
+            }
+
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Smooth scroll untuk navigasi yang halus
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // Toggle mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 10 + 5 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
     </script>
 </body>
 </html>
